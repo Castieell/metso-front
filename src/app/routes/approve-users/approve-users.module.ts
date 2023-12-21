@@ -15,7 +15,7 @@ import { ApproveUserRoutingModule } from './approve-users-routing.module';
 import { ApprovesUserDetailComponent } from './approves-user-detail/approves-user-detail.component';
 import { ApprovesUsersListComponent } from './approves-users-list/approves-users-list.component';
 import { ModalDetailUserComponent } from './modal-detail-user/modal-detail-user.component';
-import { UsersModule } from '../users/users.module';
+//import { UsersModule } from '../users/users.module';
 
 @NgModule({
   declarations: [ApprovesUserDetailComponent, ApprovesUsersListComponent, ModalDetailUserComponent],
@@ -32,7 +32,7 @@ import { UsersModule } from '../users/users.module';
     FullContentModule,
     SharedModule,
     ApproveUserRoutingModule,
-    UsersModule
+  //  UsersModule
   ]
 })
 export class ApproveUsersModule {}
