@@ -1,0 +1,35 @@
+{
+  "app": {
+    "name": "getGo",
+    "description": "Ng-zorro admin panel front-end framework"
+  },
+  "menu": [
+    {
+      "text": "",
+      "i18n": "",
+      "group": true,
+      "hideInBreadcrumb": true,
+      "children": [
+        {
+          "text": "Empleados",
+          "i18n": "Empleados",
+          "link": "/users",
+          "icon": "anticon-user"
+        },
+        {
+          "text": "Recursos Humanos",
+          "i18n": "Recursos Humanos",
+          "link": "/recursosHumanos",
+          "icon": "anticon-user"
+        },
+        {
+          "text": "HSEC",
+          "i18n": "HSEC",
+          "link": "/HSEC",
+          "icon": "anticon-user"
+        }
+        
+      ]
+    }
+  ]
+}

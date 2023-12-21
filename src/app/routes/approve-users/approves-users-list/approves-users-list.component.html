@@ -1,0 +1,69 @@
+<page-header [title]="'Informacion relacionada a HSEC'" />
+<nz-card [nzBordered]="false">
+  <form nz-form [nzLayout]="'inline'" (ngSubmit)="getUserFilter()" class="search__form">
+    <div nz-row [nzGutter]="{ xs: 8, sm: 8, md: 8, lg: 24, xl: 48, xxl: 48 }">
+      <div nz-col nzMd="8" nzSm="24">
+        <nz-form-item>
+          <nz-form-label nzFor="no">pk</nz-form-label>
+          <nz-form-control>
+            <input nz-input [(ngModel)]="q.name" name="no" placeholder="id" id="pk" />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div nz-col nzMd="8" nzSm="24"> </div>
+      <div nz-col nzMd="8" nzSm="24" *ngIf="expandForm">
+        <nz-form-item>
+          <nz-form-label nzFor="callNo">vacio</nz-form-label>
+          <nz-form-control>
+            <input nz-input id="callNo" />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div nz-col nzMd="8" nzSm="24" *ngIf="expandForm">
+        <nz-form-item>
+          <nz-form-label nzFor="updatedAt"></nz-form-label>
+          <nz-form-control>
+            <nz-date-picker id="updatedAt" />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div nz-col nzMd="8" nzSm="24" *ngIf="expandForm">
+        <nz-form-item>
+          <nz-form-label nzFor="status2">Filtarr</nz-form-label>
+          <nz-form-control>
+            <nz-select [nzPlaceHolder]="'Filtrar'" nzId="status2" [nzShowSearch]="true">
+              <nz-option *ngFor="let i of status; let idx = index" [nzLabel]="i.text" [nzValue]="idx" />
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div nz-col nzMd="8" nzSm="24" *ngIf="expandForm">
+        <nz-form-item>
+          <nz-form-label nzFor="status3">Filtrar</nz-form-label>
+          <nz-form-control>
+            <nz-select [nzPlaceHolder]="'BUSCAR'" nzId="status3" [nzShowSearch]="true">
+              <nz-option *ngFor="let i of status; let idx = index" [nzLabel]="i.text" [nzValue]="idx" />
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div class="search-buttons">
+        <button nz-button type="submit" [nzType]="'primary'" [nzLoading]="loading">Filtrar</button>
+        <button nz-button type="reset" (click)="getUserToApprove()">Reset</button>
+      </div>
+      <div nz-col [nzSpan]="expandForm ? 24 : 8" [class.text-right]="expandForm">
+        <button nz-button type="submit" [nzType]="'primary'" [nzLoading]="loading">Filtar</button>
+      </div>
+    </div>
+  </form>
+  <button nz-button (click)="createUser()" [nzType]="'dashed'" nzBlock class="mb-sm">
+    <i nz-icon nzType="plus"></i>
+    <span>Crear Usuario</span>
+  </button>
+  <div class="my-md"> </div>
+  <st #st [columns]="columns" [data]="data" [loading]="loading" (change)="stChange($event)" [scroll]="scroll">
+    <ng-template st-row="status" let-i>
+      <nz-badge [nzStatus]="i.statusType" [nzText]="i.statusText" />
+    </ng-template>
+  </st>
+</nz-card>
