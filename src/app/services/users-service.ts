@@ -19,10 +19,10 @@ export class UserService {
   }
 
   getUsers(): Observable<any[]> {
-    console.log(this.token)
+    console.log(this.token);
     apiUrl = JSON.parse(localStorage.getItem('url') || '{}');
     const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json'
       //Authorization: `Bearer ${this.token}`
     });
 
@@ -36,10 +36,10 @@ export class UserService {
     );
   }
   getUsersCertificates(): Observable<any[]> {
-    console.log(this.token)
+    console.log(this.token);
     apiUrl = JSON.parse(localStorage.getItem('url') || '{}');
     const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json'
       //Authorization: `Bearer ${this.token}`
     });
 

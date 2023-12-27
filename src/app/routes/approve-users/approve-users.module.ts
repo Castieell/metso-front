@@ -8,8 +8,10 @@ import { TagSelectModule } from '@delon/abc/tag-select';
 import { G2MiniBarModule } from '@delon/chart/mini-bar';
 import { CurrencyPipeModule } from '@delon/util';
 import { SharedModule } from '@shared';
+import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { NzStepsModule } from 'ng-zorro-antd/steps';
+import { NzTableModule } from 'ng-zorro-antd/table';
 
 import { ApproveUserRoutingModule } from './approve-users-routing.module';
 import { ApprovesUserDetailComponent } from './approves-user-detail/approves-user-detail.component';
@@ -32,7 +34,8 @@ import { UsersModule } from '../users/users.module';
     FullContentModule,
     SharedModule,
     ApproveUserRoutingModule,
-    UsersModule
+    UsersModule,
+    NzTableModule
   ]
 })
 export class ApproveUsersModule {}

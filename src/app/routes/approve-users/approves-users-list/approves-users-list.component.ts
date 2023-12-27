@@ -9,9 +9,6 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 import { tap } from 'rxjs';
 import { UserService } from 'src/app/services/users-service';
 //import {} from 'UsersMod';
-
-
-
 @Component({
   selector: 'app-approves-users-list',
   templateUrl: './approves-users-list.component.html',
@@ -95,10 +92,10 @@ export class ApprovesUsersListComponent implements OnInit {
     //  index: 'usuarios.name',
     //  width: 100
     //},
-    { title: 'Apellido', index: 'usuarios.first_last_name', width: 100 },
-    { title: 'RUT', index: 'usuarios.employee_rut', width: 100 },
-    { title: 'Certificado', index: 'certificado.nombre_certificado', width: 100 },
-    { title: 'Esp. Confinados', index: '', width: 100 },
+    { title: 'Apellido', index: 'user.first_last_name', width: 100 },
+    { title: 'RUT', index: 'user.employee_rut', width: 100 },
+    { title: 'Certificado', index: 'certificate[1].fecha_certificado', width: 100 },
+    { title: 'Esp. Confinados', index: 'certificate.fecha_certificado', width: 100 },
     { title: 'Induc. CCMC', index: '', width: 100 },
     { title: 'LOTOTO', index: '', width: 100 },
     { title: 'Open Hole', index: '', width: 100 },
@@ -107,7 +104,7 @@ export class ApprovesUsersListComponent implements OnInit {
     { title: 'Izaje', index: '', width: 100 },
     { title: 'Certif. Rigger', index: '', width: 100 },
     { title: 'Op.Pte Grua', index: '', width: 100 },
-    { title: 'T.en caliente', index: '', width: 100 }, 
+    { title: 'T.en caliente', index: '', width: 100 },
     {
       title: 'Actions',
       width: 120,
@@ -135,6 +132,19 @@ export class ApprovesUsersListComponent implements OnInit {
     this.token = JSON.parse(localStorage.getItem('userData') || '{}').token;
   }
 
+  listOfColumns: any[] = [
+    {
+      title: 'Empleados',
+      compare: (a: any, b: any) => a.user.name.localeCompare(b.user.name),
+      priority: 2
+    },
+    {
+      title: 'Certificados',
+      compare: (a: any, b: any) => a.certificates.length - b.certificates.length,
+      priority: 1
+    }
+  ];
+
   ngOnInit(): void {
     this.loading = true;
     this.getUserToApprove();
@@ -147,6 +157,8 @@ export class ApprovesUsersListComponent implements OnInit {
       .pipe(tap(() => (this.loading = false)))
       .subscribe(res => {
         this.data = res;
+        console.log(this.data);
+
         this.dataOriginal = res;
         this.loading = false;
         this.cdr.detectChanges();
@@ -155,8 +167,8 @@ export class ApprovesUsersListComponent implements OnInit {
 
   protected getUserFilter() {
     this.data = this.dataOriginal;
-    console.log(this.q)
-    console.log(this.data)
+    console.log(this.q);
+    console.log(this.data);
     if (this.q.name && this.q.name.trim() !== '') {
       console.log(this.data);
       const data1 = this.data.filter(
@@ -165,7 +177,7 @@ export class ApprovesUsersListComponent implements OnInit {
           item.usuarios.employee_rut.toLowerCase().includes(this.q.name.trim().toLowerCase()) ||
           item.usuarios.first_last_name.toLowerCase().includes(this.q.name.trim().toLowerCase())
       );
-      console.log(data1)
+      console.log(data1);
       this.data = [...data1];
     } else {
     }
@@ -187,28 +199,6 @@ export class ApprovesUsersListComponent implements OnInit {
     this.scroll = val ? { y: '550px' } : { y: '430px' };
   }
 
-  // remove(): void {
-  //   this.http.delete('/rule', { nos: this.selectedRows.map(i => i['no']).join(',') }).subscribe(() => {
-  //     this.getData();
-  //     this.st.clearCheck();
-  //   });
-  // }
-
-  // approval(): void {
-  //   this.msg.success(`审批了 ${this.selectedRows.length} 笔`);
-  // }
-
-  // add(tpl: TemplateRef<{}>): void {
-  //   this.modalSrv.create({
-  //     nzTitle: '新建规则',
-  //     nzContent: tpl,
-  //     nzOnOk: () => {
-  //       this.loading = true;
-  //       this.http.post('/rule', { description: this.description }).subscribe(() => this.getData());
-  //     }
-  //   });
-  // }
-
   reset(): void {
     // wait form reset updated finished
     setTimeout(() => this.getUserToApprove());
@@ -218,4 +208,16 @@ export class ApprovesUsersListComponent implements OnInit {
     this.router.navigate([`/users/create`]);
   }
 
+  onCertificateClick(certificado: any): void {
+    // Lógica para la acción al hacer clic en el certificado
+    console.log('Certificado clickeado:', certificado);
+    this.router.navigate([`/users/create`]);
+    // Agrega aquí la lógica que deseas ejecutar al hacer clic en un certificado
+  }
+
+  isExpired(certificateDate: string): boolean {
+    const currentDate = new Date();
+    const certDate = new Date(certificateDate);
+    return certDate < currentDate;
+  }
 }
