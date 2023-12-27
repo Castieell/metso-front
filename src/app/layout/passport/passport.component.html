@@ -1,0 +1,18 @@
+<div class="container">
+  <header-i18n showLangText="false" class="langs" />
+  <div class="wrap">
+    <div class="top">
+      <div class="head">
+        <span class="title"></span>
+        <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/f/f9/Metso-logo.png" />
+      </div>
+      <div class="desc">Administrador</div>
+    </div>
+    <router-outlet />
+    <global-footer [links]="links">
+      Copyright
+      <i nz-icon nzType="copyright"></i> 2021 <a href="//github.com/cipchk" target="_blank"></a>
+    </global-footer>
+  </div>
+</div>
+<theme-btn />

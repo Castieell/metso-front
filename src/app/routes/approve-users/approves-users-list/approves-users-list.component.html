@@ -1,0 +1,59 @@
+<page-header [title]="'Informacion relacionada a HSEC'" />
+<nz-card [nzBordered]="false">
+  <form nz-form [nzLayout]="'inline'" (ngSubmit)="getUserFilter()" class="search__form">
+    <div class="ant-row">
+      <div class="ant-col ant-col-18" nzMd="18" nzSm="24">
+        <nz-form-item>
+          <nz-form-label nzFor="no">Nombre</nz-form-label>
+          <nz-form-control>
+            <input nz-input [(ngModel)]="q.name" name="no" placeholder="Nombre" id="Nombre" />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div class="ant-col ant-col-6" nzMd="16" nzSm="24" style="display: flex; padding-left: 10px">
+        <button nz-button type="submit" [nzType]="'primary'" [nzLoading]="loading">Filtrar</button>
+        <button nz-button type="reset" (click)="getUserToApprove()" style="margin-left: 8px">Reset</button>
+      </div>
+    </div>
+  </form>
+  <!-- <button nz-button (click)="createUser()" [nzType]="'dashed'" nzBlock class="mb-sm">
+    <i nz-icon nzType="plus"></i>
+    <span>Crear Usuario</span>
+  </button> -->
+  <div class="my-md"> </div>
+  <!-- <st #st [columns]="columns" [data]="data" [loading]="loading" (change)="stChange($event)" [scroll]="scroll">
+    <ng-template st-row="status" let-i>
+      <nz-badge [nzStatus]="i.statusType" [nzText]="i.statusText" />
+    </ng-template>
+  </st> -->
+  <nz-table
+    [nzData]="data"
+    [nzFrontPagination]="true"
+    [nzShowPagination]="false"
+    [nzShowSizeChanger]="true"
+    [nzLoading]="false"
+    [nzShowQuickJumper]="false"
+  >
+    <thead>
+      <tr>
+        <th *ngFor="let column of listOfColumns">
+          {{ column.title }}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of data">
+        <td>{{ row.user.name }}</td>
+        <td>
+          <div class="certificate" *ngFor="let c of row.certificate">
+            <span [ngClass]="{ 'expired-row': isExpired(c.fecha_certificado) }" (click)="onCertificateClick(c)">
+              {{ c.nombre_certificado }} - {{ c.fecha_certificado }}
+            </span>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+
+  <ng-template #totalTemplate let-total let-range="range"> {{ range[0] }}-{{ range[1] }} of {{ total }} items </ng-template>
+</nz-card>
