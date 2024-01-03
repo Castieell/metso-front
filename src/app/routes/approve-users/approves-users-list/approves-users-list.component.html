@@ -26,8 +26,14 @@
       <nz-badge [nzStatus]="i.statusType" [nzText]="i.statusText" />
     </ng-template>
   </st> -->
-  <nz-table [nzData]="data" [nzFrontPagination]="true" [nzShowPagination]="false" [nzShowSizeChanger]="true"
-    [nzLoading]="false" [nzShowQuickJumper]="false">
+  <nz-table
+    [nzData]="data"
+    [nzFrontPagination]="true"
+    [nzShowPagination]="false"
+    [nzShowSizeChanger]="true"
+    [nzLoading]="false"
+    [nzShowQuickJumper]="false"
+  >
     <thead>
       <tr>
         <th *ngFor="let column of listOfColumns">
@@ -42,12 +48,10 @@
         <td>{{ row.user.employee_rut }}</td>
         <td>
           <div class="certificate" *ngFor="let c of row.certificate">
-            <span *ngIf="c.fecha_relizacion" [ngClass]="{ 'expired-row': isExpired(c.fecha_relizacion) }"
-              (click)="onCertificateClick(c)">
+            <span *ngIf="c.fecha_relizacion" [ngClass]="{ 'expired-row': isExpired(c.fecha_relizacion) }" (click)="onCertificateClick(c)">
               {{ c.nombre_certificado }} - {{ c.fecha_relizacion }}
             </span>
-            <span *ngIf!="c.fecha_relizacion" [ngClass]="{ 'blank-row': c.fecha_relizacion }"
-              (click)="onCertificateClick(c)">
+            <span *ngIf="!c.fecha_relizacion" class="blank-row" (click)="onCertificateClick(c)">
               {{ c.nombre_certificado }} - {{ c.fecha_relizacion | date }}
             </span>
           </div>
@@ -56,6 +60,5 @@
     </tbody>
   </nz-table>
 
-  <ng-template #totalTemplate let-total let-range="range"> {{ range[0] }}-{{ range[1] }} of {{ total }} items
-  </ng-template>
+  <ng-template #totalTemplate let-total let-range="range"> {{ range[0] }}-{{ range[1] }} of {{ total }} items </ng-template>
 </nz-card>
