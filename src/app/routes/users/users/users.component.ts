@@ -44,16 +44,16 @@ export class UsersComponent implements OnInit {
     status: number | null;
     statusList: NzSafeAny[];
   } = {
-    pk: 1,
-    ps: 10,
-    email: '',
-    sorter: '',
-    status: null,
-    statusList: [],
-    name: '',
-    first_last_name: '',
-    employee_rut: ''
-  };
+      pk: 1,
+      ps: 10,
+      email: '',
+      sorter: '',
+      status: null,
+      statusList: [],
+      name: '',
+      first_last_name: '',
+      employee_rut: ''
+    };
   data: any[] = [];
   dataOriginal: any[] = [];
   loading = false;
@@ -85,7 +85,7 @@ export class UsersComponent implements OnInit {
       width: 120,
       buttons: [
         {
-          text: 'Detalle',
+          text: 'Detalles',
           click: item => this.router.navigate([`/users/detail/${item.pk}`])
         }
       ]

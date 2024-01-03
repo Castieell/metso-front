@@ -4,9 +4,9 @@
     <div class="ant-row">
       <div class="ant-col ant-col-18" nzMd="18" nzSm="24">
         <nz-form-item>
-          <nz-form-label nzFor="no">Nombre</nz-form-label>
+          <nz-form-label nzFor="no">Búsqueda</nz-form-label>
           <nz-form-control>
-            <input nz-input [(ngModel)]="q.name" name="no" placeholder="Nombre" id="Nombre" />
+            <input nz-input [(ngModel)]="q.name" name="no" placeholder="" id="Nombre" />
           </nz-form-control>
         </nz-form-item>
       </div>
@@ -26,14 +26,8 @@
       <nz-badge [nzStatus]="i.statusType" [nzText]="i.statusText" />
     </ng-template>
   </st> -->
-  <nz-table
-    [nzData]="data"
-    [nzFrontPagination]="true"
-    [nzShowPagination]="false"
-    [nzShowSizeChanger]="true"
-    [nzLoading]="false"
-    [nzShowQuickJumper]="false"
-  >
+  <nz-table [nzData]="data" [nzFrontPagination]="true" [nzShowPagination]="false" [nzShowSizeChanger]="true"
+    [nzLoading]="false" [nzShowQuickJumper]="false">
     <thead>
       <tr>
         <th *ngFor="let column of listOfColumns">
@@ -44,10 +38,17 @@
     <tbody>
       <tr *ngFor="let row of data">
         <td>{{ row.user.name }}</td>
+        <td>{{ row.user.first_last_name }}</td>
+        <td>{{ row.user.employee_rut }}</td>
         <td>
           <div class="certificate" *ngFor="let c of row.certificate">
-            <span [ngClass]="{ 'expired-row': isExpired(c.fecha_certificado) }" (click)="onCertificateClick(c)">
-              {{ c.nombre_certificado }} - {{ c.fecha_certificado }}
+            <span *ngIf="c.fecha_relizacion" [ngClass]="{ 'expired-row': isExpired(c.fecha_relizacion) }"
+              (click)="onCertificateClick(c)">
+              {{ c.nombre_certificado }} - {{ c.fecha_relizacion }}
+            </span>
+            <span *ngIf!="c.fecha_relizacion" [ngClass]="{ 'blank-row': c.fecha_relizacion }"
+              (click)="onCertificateClick(c)">
+              {{ c.nombre_certificado }} - {{ c.fecha_relizacion | date }}
             </span>
           </div>
         </td>
@@ -55,5 +56,6 @@
     </tbody>
   </nz-table>
 
-  <ng-template #totalTemplate let-total let-range="range"> {{ range[0] }}-{{ range[1] }} of {{ total }} items </ng-template>
+  <ng-template #totalTemplate let-total let-range="range"> {{ range[0] }}-{{ range[1] }} of {{ total }} items
+  </ng-template>
 </nz-card>

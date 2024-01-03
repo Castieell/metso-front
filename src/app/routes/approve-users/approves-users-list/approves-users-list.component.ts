@@ -35,16 +35,16 @@ export class ApprovesUsersListComponent implements OnInit {
     status: number | null;
     statusList: NzSafeAny[];
   } = {
-    pk: 1,
-    ps: 10,
-    email: '',
-    sorter: '',
-    status: null,
-    statusList: [],
-    name: '',
-    first_last_name: '',
-    employee_rut: ''
-  };
+      pk: 1,
+      ps: 10,
+      email: '',
+      sorter: '',
+      status: null,
+      statusList: [],
+      name: '',
+      first_last_name: '',
+      employee_rut: ''
+    };
   data: any[] = [];
   dataOriginal: any[] = [];
   loading = false;
@@ -120,6 +120,7 @@ export class ApprovesUsersListComponent implements OnInit {
   description = '';
   totalCallNo = 0;
   expandForm = false;
+  appConfigService: any;
 
   constructor(
     private http: _HttpClient,
@@ -134,15 +135,27 @@ export class ApprovesUsersListComponent implements OnInit {
 
   listOfColumns: any[] = [
     {
-      title: 'Empleados',
+      title: 'Nombre',
       compare: (a: any, b: any) => a.user.name.localeCompare(b.user.name),
+      priority: 1
+    },
+    {
+      title: 'Apellido',
+      compare: (a: any, b: any) => a.user.first_last_name.localeCompare(b.user.first_last_name),
       priority: 2
     },
     {
-      title: 'Certificados',
+      title: 'Rut',
+      compare: (a: any, b: any) => a.user.employee_rut.localeCompare(b.user.employee_rut),
+      priority: 3
+    },
+    {
+      title: 'Certificados Minera Candelaria',
       compare: (a: any, b: any) => a.certificates.length - b.certificates.length,
-      priority: 1
+      priority: 4
     }
+
+
   ];
 
   ngOnInit(): void {
@@ -173,9 +186,11 @@ export class ApprovesUsersListComponent implements OnInit {
       console.log(this.data);
       const data1 = this.data.filter(
         item =>
-          item.usuarios.name.toLowerCase().includes(this.q.name.trim().toLowerCase()) ||
-          item.usuarios.employee_rut.toLowerCase().includes(this.q.name.trim().toLowerCase()) ||
-          item.usuarios.first_last_name.toLowerCase().includes(this.q.name.trim().toLowerCase())
+          item.user.name.toLowerCase().includes(this.q.name.trim().toLowerCase()) ||
+          item.user.employee_rut.toLowerCase().includes(this.q.name.trim().toLowerCase()) ||
+          item.user.first_last_name.toLowerCase().includes(this.q.name.trim().toLowerCase())
+        //item.Certificados.certificado.toLowerCase().includes(this.q.name.trim().toLowerCase())
+
       );
       console.log(data1);
       this.data = [...data1];
@@ -211,7 +226,9 @@ export class ApprovesUsersListComponent implements OnInit {
   onCertificateClick(certificado: any): void {
     // Lógica para la acción al hacer clic en el certificado
     console.log('Certificado clickeado:', certificado);
-    this.router.navigate([`/users/create`]);
+    //this.router.navigate([`/users/create`]);
+    //window.open(`https://onedrive.com${this.appConfigService.middlewareServicesBaseUrls.settingsService}/redirects`);
+    window.open('https://onedrive.com');
     // Agrega aquí la lógica que deseas ejecutar al hacer clic en un certificado
   }
 
