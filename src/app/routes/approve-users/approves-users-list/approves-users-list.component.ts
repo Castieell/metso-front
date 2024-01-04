@@ -8,7 +8,6 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { tap } from 'rxjs';
 import { UserService } from 'src/app/services/users-service';
-//import {} from 'UsersMod';
 @Component({
   selector: 'app-approves-users-list',
   templateUrl: './approves-users-list.component.html',
@@ -150,9 +149,19 @@ export class ApprovesUsersListComponent implements OnInit {
       priority: 3
     },
     {
+      title: 'Cargo',
+      compare: (a: any, b: any) => a.user.Cargo.localeCompare(b.user.Cargo),
+      priority: 4
+    },
+    {
+      title: 'Contrato',
+      compare: (a: any, b: any) => a.user.Contrato.localeCompare(b.user.Contrato),
+      priority: 5
+    },
+    {
       title: 'Certificados Minera Candelaria',
       compare: (a: any, b: any) => a.certificates.length - b.certificates.length,
-      priority: 4
+      priority: 6
     }
 
 
@@ -188,8 +197,9 @@ export class ApprovesUsersListComponent implements OnInit {
         item =>
           item.user.name.toLowerCase().includes(this.q.name.trim().toLowerCase()) ||
           item.user.employee_rut.toLowerCase().includes(this.q.name.trim().toLowerCase()) ||
-          item.user.first_last_name.toLowerCase().includes(this.q.name.trim().toLowerCase())
-        //item.Certificados.certificado.toLowerCase().includes(this.q.name.trim().toLowerCase())
+          item.user.first_last_name.toLowerCase().includes(this.q.name.trim().toLowerCase()) ||
+          item.user.cargo.toLowerCase().includes(this.q.name.trim().toLowerCase()) ||
+          item.user.contrato.toLowerCase().includes(this.q.name.trim().toLowerCase())
 
       );
       console.log(data1);

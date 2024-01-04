@@ -80,6 +80,8 @@ export class UsersComponent implements OnInit {
     },
     { title: 'Apellido', index: 'first_last_name', width: 100 },
     { title: 'RUT', index: 'employee_rut', width: 100 },
+    { title: 'Cargo', index: 'cargo', width: 100 },
+    { title: 'Contrato', index: 'contrato', width: 100 },
     {
       title: 'Actions',
       width: 120,
@@ -133,6 +135,8 @@ export class UsersComponent implements OnInit {
           item.name.toLowerCase().includes(this.q.name.trim().toLowerCase()) ||
           item.employee_rut.toLowerCase().includes(this.q.name.trim().toLowerCase()) ||
           item.first_last_name.toLowerCase().includes(this.q.name.trim().toLowerCase())
+        //item.Cargo.toLowerCase().includes(this.q.name.trim().toLowerCase()) ||
+        //item.Contrato.toLowerCase().includes(this.q.name.trim().toLowerCase())
       );
       console.log(data1)
       this.data = [...data1];
