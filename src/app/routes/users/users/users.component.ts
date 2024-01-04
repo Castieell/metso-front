@@ -87,8 +87,10 @@ export class UsersComponent implements OnInit {
       width: 120,
       buttons: [
         {
-          text: 'Detalles',
-          click: item => this.router.navigate([`/users/detail/${item.pk}`])
+          text: 'Detalles del empleado',
+          //click: item => this.router.navigate([`/users/detail/${item.pk}`])
+          //click: item => window.location.href = 'https://onedrive.com'
+          click: item => window.open('https://onedrive.com', '_blank')
         }
       ]
     }
@@ -134,9 +136,9 @@ export class UsersComponent implements OnInit {
         item =>
           item.name.toLowerCase().includes(this.q.name.trim().toLowerCase()) ||
           item.employee_rut.toLowerCase().includes(this.q.name.trim().toLowerCase()) ||
-          item.first_last_name.toLowerCase().includes(this.q.name.trim().toLowerCase())
-        //item.Cargo.toLowerCase().includes(this.q.name.trim().toLowerCase()) ||
-        //item.Contrato.toLowerCase().includes(this.q.name.trim().toLowerCase())
+          item.first_last_name.toLowerCase().includes(this.q.name.trim().toLowerCase()) ||
+          item.cargo.toLowerCase().includes(this.q.name.trim().toLowerCase()) ||
+          item.contrato.toLowerCase().includes(this.q.name.trim().toLowerCase())
       );
       console.log(data1)
       this.data = [...data1];
